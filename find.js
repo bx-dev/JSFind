@@ -232,7 +232,6 @@
   	}
 
 
-
     //добавляем для массива метод find
     if (!Array.prototype.find)
     {
