@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <script src="find.js"></script>
+    </head>
+    <body>
+        <script language="JavaScript" type="text/javascript">
+            var cars=[
+            			{
+            				brand: 'audi',		    //фирма производитель
+            				model: 'a4',		    //модель
+            				volume_engine: '1.8',	//объём двигателя
+            				hp: '120',		        //кол-во лошадиных сил
+            				awd: 'нет',   		    //полный привод [да/нет]
+            				automat: 'да',		    //автомат [да/нет]
+            			},
+            			{
+            				brand: 'audi',		    //фирма производитель
+            				model: 'a4 allroad',	//модель
+            				volume_engine: '2',	    //объём двигателя
+            				hp: '211',		        //кол-во лошадиных сил
+            				awd: 'да',   		    //полный привод [да/нет]
+            				automat: 'да',		    //автомат [да/нет]
+            			},
+            			{
+            				brand: 'audi',		    //фирма производитель
+            				model: 'a6',		    //модель
+            				volume_engine: '2',	    //объём двигателя
+            				hp: '180',		        //кол-во лошадиных сил
+            				awd: 'нет',   		    //полный привод [да/нет]
+            				automat: 'да',		    //автомат [да/нет]
+            			},
+            			{
+            				brand: 'bmw',		    //фирма производитель
+            				model: '3 Series',	    //модель
+            				volume_engine: '1.6',	//объём двигателя
+            				hp: '135',		        //кол-во лошадиных сил
+            				awd: 'нет',   		    //полный привод [да/нет]
+            				automat: 'нет',		    //автомат [да/нет]
+            			},
+            			{
+            				brand: 'bmw',		    //фирма производитель
+            				model: '5 Series',	    //модель
+            				volume_engine: '3',	    //объём двигателя
+            				hp: '258',		        //кол-во лошадиных сил
+            				awd: 'нет',   		    //полный привод [да/нет]
+            				automat: 'да',		    //автомат [да/нет]
+            			},
+            			{
+            				brand: 'volkswagen',	//фирма производитель
+            				model: 'passat',	    //модель
+            				volume_engine: '1.8',	//объём двигателя
+            				hp: '152',		        //кол-во лошадиных сил
+            				awd: 'нет',   		    //полный привод [да/нет]
+            				automat: 'да',		    //автомат [да/нет]
+            			},
+            ];
+
+            //Для начала выберем из массива все автомобили марки audi:
+            console.log( cars.find({ brand:"audi"}) );
+
+            //Выберем все модели a4 марки audi:
+            console.log( cars.find({ brand: "audi", model: "%a4%" }) );
+
+            //Выберем все модели a4 марки audi с полным приводом:
+            console.log( cars.find({ brand: "audi", model: "%a4%", awd:"да" }) );
+
+            //— тоже самое, но выборка идёт по очереди:
+            console.log( cars.find({ brand: "audi" }).find({ model: "%a4%" }).find({ awd: "да" }) );
+
+            //А теперь найдем все авто с мощностью двигателя больше 200 лошадок:
+            console.log( cars.find({ hp: ">=200" }) );
+
+            //Выберем двух и трёхлитровые машины:
+            console.log( cars.find({ volume_engine: ["2","3"] }) );
+
+            //Выберем двух и трёхлитровые машины фирмы audi:
+            console.log( cars.find({ brand:"audi", volume_engine:["2","3"] }) );
+
+            //Выберем все машины у которых объём двигателя строго меньше 2ух литров и больше или равен 3ём:
+            console.log( cars.find({volume_engine:["<2",">=3"] }) );
+
+        </script>
+    </body>
+</html>
