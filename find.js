@@ -1,37 +1,4 @@
 
-    //http://stackoverflow.com/questions/4197591/parsing-url-hash-fragment-identifier-with-javascript////////////////////
-    //
-        function getHashParams() {
-
-            var hashParams = {};
-            var i=0,
-                e,
-                ep,
-                a = /\+/g,  // Regex for replacing addition symbol with a space
-                r = /([^&;=]+)=?([^&;]*)/g,
-                rp= /([^,]+)/g,
-                d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-                q = window.location.hash.substring(1);
-
-            while (e = r.exec(q))
-            {
-               hashParams[d(e[1])] = Array();
-               i=0;
-               while(  ep = rp.exec( d(e[2]) )  ) hashParams[ d(e[1]) ][ i++ ] = ep[0];
-
-               //console.log( ep[0] );
-
-            }
-
-               //console.log(hashParams);
-            return hashParams;
-
-        }
-    //
-    //http://stackoverflow.com/questions/4197591/parsing-url-hash-fragment-identifier-with-javascript////////////////////
-
-
-
 	//https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter#Compatibility/////////////////////////////
 	//
 		if (!Array.prototype.filter)
@@ -96,41 +63,14 @@
     //https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some/////////////////////////////////////////////
 
 
-
-
-
-
-
-	//это массив?
-	function is_array( mixed_var )
+	//СЌС‚Рѕ РјР°СЃСЃРёРІ?
+	/*function is_array( mixed_var )
     {
 		return ( mixed_var instanceof Array );
-	}
-	//это не массив?
-	function is_not_array( mixed_var )
-    {
-		return !( mixed_var instanceof Array );
-	}
-	//это объект?
-	function is_object( mixed_var )
-    {
-		if(mixed_var instanceof Array)
-        {
-			return false;
-		}
-        else
-        {
-			return (mixed_var !== null) && (typeof( mixed_var ) == 'object');
-		}
-	}
-	//это не объект?
-	function is_not_object( mixed_var )
-    {
-		return !is_object( mixed_var );
-	}
+	}*/
 
 
-	//добавляем для массива метод indexOf - содержит ли массив значение needle, если да, то вернёт его номер в массиве, если нет, то вернёт -1
+	//РґРѕР±Р°РІР»СЏРµРј РґР»СЏ РјР°СЃСЃРёРІР° РјРµС‚РѕРґ indexOf - СЃРѕРґРµСЂР¶РёС‚ Р»Рё РјР°СЃСЃРёРІ Р·РЅР°С‡РµРЅРёРµ needle, РµСЃР»Рё РґР°, С‚Рѕ РІРµСЂРЅС‘С‚ РµРіРѕ РЅРѕРјРµСЂ РІ РјР°СЃСЃРёРІРµ, РµСЃР»Рё РЅРµС‚, С‚Рѕ РІРµСЂРЅС‘С‚ -1
     if (!Array.prototype.indexOf) {
         Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
             "use strict";
@@ -165,10 +105,10 @@
     }
 
 
-	//добавляем для массива метод fl
+	//РґРѕР±Р°РІР»СЏРµРј РґР»СЏ РјР°СЃСЃРёРІР° РјРµС‚РѕРґ fl
 	if (!Array.prototype.find)
 	{
-			//						     function(условия, проверяемый_объект)
+			//						     function(СѓСЃР»РѕРІРёСЏ, РїСЂРѕРІРµСЂСЏРµРјС‹Р№_РѕР±СЉРµРєС‚)
 			Array.prototype.find_check = function(terms  , checking_obj      )
 			{
 					/*
@@ -185,7 +125,7 @@
 					*/
 
 					var checked = true;
-					for( key in terms )//перебираем все параметры в условие
+					for( key in terms )//РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ РїР°СЂР°РјРµС‚СЂС‹ РІ СѓСЃР»РѕРІРёРµ
 					{
 							/*
 								checking_obj == {
@@ -197,15 +137,15 @@
 								checking_obj_value == "Chianti Classico";
 							*/
 
-							if(!checking_obj){ checked = false; continue; } //если проверяемый объект не объект
-							if(!checking_obj[key]){ checked = false; continue; } //если проверяемый объект не содержит ключа, который есть в условии
+							if(!checking_obj){ checked = false; continue; } //РµСЃР»Рё РїСЂРѕРІРµСЂСЏРµРјС‹Р№ РѕР±СЉРµРєС‚ РЅРµ РѕР±СЉРµРєС‚
+							if(!checking_obj[key]){ checked = false; continue; } //РµСЃР»Рё РїСЂРѕРІРµСЂСЏРµРјС‹Р№ РѕР±СЉРµРєС‚ РЅРµ СЃРѕРґРµСЂР¶РёС‚ РєР»СЋС‡Р°, РєРѕС‚РѕСЂС‹Р№ РµСЃС‚СЊ РІ СѓСЃР»РѕРІРёРё
 
 							var term_value = terms[key]; // ">1000"
 							var checking_obj_value = checking_obj[key];// "4000"
 
-							//console.log('условие: ', term_value);
+							//console.log('СѓСЃР»РѕРІРёРµ: ', term_value);
 
-							if( is_array( term_value ) )//пресеты фильтрующие ИЛИ
+							if(( term_value instanceof Array ))//( is_array( term_value ) )//РїСЂРµСЃРµС‚С‹ С„РёР»СЊС‚СЂСѓСЋС‰РёРµ РР›Р
 							{
 									/*
 										term_value = [ >111, 222 ]
@@ -229,12 +169,12 @@
 
 									//console.log('prolog_term:', prolog_term, '  body_term:', body_term, '  epilog_term:' ,epilog_term);
 
-									if( prolog_term == '>=' )//пресеты фильтрующие
+									if( prolog_term == '>=' )//РїСЂРµСЃРµС‚С‹ С„РёР»СЊС‚СЂСѓСЋС‰РёРµ
 									{
 											//console.log(  );
 											checked = checked && ( parseFloat(checking_obj_value) >= parseFloat(body_term)) ;
 									}
-									else if( prolog_term == '<=' )//пресеты фильтрующие
+									else if( prolog_term == '<=' )//РїСЂРµСЃРµС‚С‹ С„РёР»СЊС‚СЂСѓСЋС‰РёРµ
 									{
 											//console.log(  );
 											checked = checked &&
@@ -242,7 +182,7 @@
 												parseFloat(checking_obj_value) <= parseFloat(body_term)
 											);
 									}
-									else if( prolog_term == '><' )//пресеты фильтрующие
+									else if( prolog_term == '><' )//РїСЂРµСЃРµС‚С‹ С„РёР»СЊС‚СЂСѓСЋС‰РёРµ
 									{
 											//console.log(  );
 											var parsing_body_term_array = /^([^;]+)(;+)([^;]+)$/i.exec( body_term );
@@ -258,29 +198,29 @@
 												parseFloat(checking_obj_value) <= parseFloat(body_term_second)
 											);
 									}
-									else if( prolog_term == '>' )//пресеты фильтрующие
+									else if( prolog_term == '>' )//РїСЂРµСЃРµС‚С‹ С„РёР»СЊС‚СЂСѓСЋС‰РёРµ
 									{
 											//console.log(  );
 											checked = checked && ( parseFloat(checking_obj_value) > parseFloat(body_term) );
 									}
-									else if( prolog_term == '<' )//пресеты фильтрующие
+									else if( prolog_term == '<' )//РїСЂРµСЃРµС‚С‹ С„РёР»СЊС‚СЂСѓСЋС‰РёРµ
 									{
 											//console.log(  );
 											checked = checked && ( parseFloat(checking_obj_value) < parseFloat(body_term) );
 									}
-									else if( prolog_term == '%' && epilog_term == '%' )//пресеты фильтрующие по вхождению подстроки
+									else if( prolog_term == '%' && epilog_term == '%' )//РїСЂРµСЃРµС‚С‹ С„РёР»СЊС‚СЂСѓСЋС‰РёРµ РїРѕ РІС…РѕР¶РґРµРЅРёСЋ РїРѕРґСЃС‚СЂРѕРєРё
 									{
 											checked = checked && ( checking_obj_value.toLowerCase().indexOf( body_term.toLowerCase() ) >= 0 );
 									}
-									else if( prolog_term == '%' )//пресеты фильтрующие по началу подстроки ( "%text" )
+									else if( prolog_term == '%' )//РїСЂРµСЃРµС‚С‹ С„РёР»СЊС‚СЂСѓСЋС‰РёРµ РїРѕ РЅР°С‡Р°Р»Сѓ РїРѕРґСЃС‚СЂРѕРєРё ( "%text" )
 									{
 											checked = checked && ( checking_obj_value.toLowerCase().indexOf( body_term.toLowerCase() ) == (checking_obj_value.length - body_term.length ) );
 									}
-									else if( epilog_term == '%' )//пресеты фильтрующие по концу подстроки ( "text%" )
+									else if( epilog_term == '%' )//РїСЂРµСЃРµС‚С‹ С„РёР»СЊС‚СЂСѓСЋС‰РёРµ РїРѕ РєРѕРЅС†Сѓ РїРѕРґСЃС‚СЂРѕРєРё ( "text%" )
 									{
 											checked = checked && ( checking_obj_value.toLowerCase().indexOf( body_term.toLowerCase() ) == 0 );
 									}
-									else//иначе простое сравнение на равенство
+									else//РёРЅР°С‡Рµ РїСЂРѕСЃС‚РѕРµ СЃСЂР°РІРЅРµРЅРёРµ РЅР° СЂР°РІРµРЅСЃС‚РІРѕ
 									{
 											//console.log('checking_obj_value: '+checking_obj_value + '  term_value:' + term_value + '  checking_obj.NAME:' + checking_obj.NAME);
 											checked = checked && ( checking_obj_value == term_value );
@@ -288,7 +228,7 @@
 							}
 
 
-							if(!checked) return false;//если какое-то условие не прошло, то дальше продолжать не имеет смысла.
+							if(!checked) return false;//РµСЃР»Рё РєР°РєРѕРµ-С‚Рѕ СѓСЃР»РѕРІРёРµ РЅРµ РїСЂРѕС€Р»Рѕ, С‚Рѕ РґР°Р»СЊС€Рµ РїСЂРѕРґРѕР»Р¶Р°С‚СЊ РЅРµ РёРјРµРµС‚ СЃРјС‹СЃР»Р°.
 					}
 
 					return checked;
@@ -304,7 +244,8 @@
 						return ( _self.find_check( condition, element ) );
 
 					});
-
+					
+					//СЂР°Р·РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ РѕРґРЅРѕРіРѕ Рё С‚РѕРіРѕ Р¶Рµ, РІС‹Р±РёСЂР°Р» РІР°СЂРёР°РЅС‚ РїРѕ С€СѓСЃС‚СЂРµРµ	
 					/*result = function(_self){
 												return _self.filter(function(element){
 
@@ -322,9 +263,10 @@
 															}
 					}(this));*/
 
-					/*for (; from < len; from++)//перебираем все элементы массива
+					
+					/*for (; from < len; from++)//РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР°
 					{
-						if( this.find_check(condition, this[from]) )//для каждого элемента массива проверяем условие, если оно выполняется добавлем элемент в result
+						if( this.find_check(condition, this[from]) )//РґР»СЏ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РјР°СЃСЃРёРІР° РїСЂРѕРІРµСЂСЏРµРј СѓСЃР»РѕРІРёРµ, РµСЃР»Рё РѕРЅРѕ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РґРѕР±Р°РІР»РµРј СЌР»РµРјРµРЅС‚ РІ result
 						{
                             result.push(this[from]);
 						}
